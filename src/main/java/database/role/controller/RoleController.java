@@ -1,7 +1,6 @@
 package database.role.controller;
 
 
-import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import database.role.domain.Role;
 import database.role.service.RoleService;
@@ -23,8 +22,13 @@ public class RoleController {
 
     @PostMapping("/save")
     @ApiOperation("Save role.")
-    public ResponseEntity<Role> saveOrUpdate(@Valid @RequestBody Role role){
-        return new ResponseEntity<>(service.saveOrUpdate(role), HttpStatus.CREATED);
+    public ResponseEntity<Role> save(@Valid @RequestBody Role role){
+        return new ResponseEntity<>(service.save(role), HttpStatus.CREATED);
+    }
+    @PostMapping("/update/roleId")
+    @ApiOperation("Update role.")
+    public ResponseEntity<Role> update(@PathVariable Long roleId, @Valid @RequestBody Role role){
+        return new ResponseEntity<>(service.update(roleId, role), HttpStatus.CREATED);
     }
     @DeleteMapping("/delete/{roleId}")
     @ApiOperation(value = "Deletes role.")

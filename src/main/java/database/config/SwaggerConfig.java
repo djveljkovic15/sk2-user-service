@@ -26,7 +26,7 @@ public class SwaggerConfig {
     }
 
     private ApiInfo metaData() {
-        return new ApiInfo("Movie service", "Microservice for movies"
+        return new ApiInfo("User service", "Microservice for users"
                 , "1.0.0", "Terms ofPlainText service", new Contact("SK2"
                 , "", "djveljkovic15@raf.rs"), "", "", Collections.emptyList());
     }

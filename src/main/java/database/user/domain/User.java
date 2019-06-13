@@ -1,5 +1,6 @@
 package database.user.domain;
 
+import database.rank.domain.UserRank;
 import database.role.domain.Role;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,12 +9,13 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 @Entity
 @Table(name="user")
 @Data
 @NoArgsConstructor
-public class User {
+public class User implements Serializable {
 
     @Id
     @Column(name = "user_id")
@@ -23,8 +25,8 @@ public class User {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "surname")
-    private String surname;
+//    @Column(name = "surname")
+//    private String surname;
 
     @NotNull
     @Column(name = "username", unique = true)
@@ -34,12 +36,12 @@ public class User {
     @Column(name = "password")
     private String password;
 
-    private static final int MIN_PASSWORD_LENGTH = 8;
-
-    private static final int MAX_PASSWORD_LENGTH = 30;
+    private boolean banned;
 
     private boolean isPasswordValid(String plainText){
-        return plainText!= null && plainText.length()>=MIN_PASSWORD_LENGTH && plainText.length()<=MAX_PASSWORD_LENGTH;
+        return plainText!= null &&
+        plainText.length()>= 3 &&
+        plainText.length()<= 12;
     }
     public void setPassword(String password){
         if (!isPasswordValid(password))
@@ -47,35 +49,35 @@ public class User {
         this.password=password;
     }
 
-
-    @Email
-    @NotBlank
-    @NotNull
-    @Column(name = "email")
-    private String email;
-
-
+//
+//    @Email
+//    @NotBlank
+//    @NotNull
+//    @Column(name = "email")
+//    private String email;
+//
+//
     @NotNull
     @ManyToOne
     @JoinColumn(name = "user_role")
-    private Role user_role;
-
+    private Role userRole;
+//
     @NotNull
     @ManyToOne
     @JoinColumn(name = "user_rank")
-    private Role user_rank;
+    private UserRank userRank;
 
 
     @Embedded
     @Column(name = "banHistory")
     private Ban banHistory;
-
-
-
-    @NotBlank
-    @NotNull
-    @Column(name = "numberOfReservation")
-    private String numberOfReservations;
+//
+//
+//
+//    @NotBlank
+//    @NotNull
+//    @Column(name = "numberOfReservation")
+//    private String numberOfReservations;
 
 
 }

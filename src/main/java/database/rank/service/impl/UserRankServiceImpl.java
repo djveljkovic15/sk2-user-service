@@ -3,9 +3,6 @@ package database.rank.service.impl;
 import database.rank.domain.UserRank;
 import database.rank.repositorium.UserRankRepository;
 import database.rank.service.UserRankService;
-import database.role.domain.Role;
-import database.role.repositorium.RoleRepository;
-import database.role.service.RoleService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,7 +18,15 @@ public class UserRankServiceImpl implements UserRankService {
 
 
     @Override
-    public UserRank saveOrUpdate(UserRank userRank) {
+    public UserRank save(UserRank userRank) {
+        return repository.save(userRank);
+    }
+
+    @Override
+    public UserRank update(Long id, UserRank userRank) {
+        if(findById(id)==null)
+            return null;
+        userRank.setId(id);
         return repository.save(userRank);
     }
 

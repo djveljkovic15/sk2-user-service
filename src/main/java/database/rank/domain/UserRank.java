@@ -1,8 +1,5 @@
 package database.rank.domain;
 
-import javax.persistence.Entity;
-
-
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,14 +7,15 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
+import java.io.Serializable;
 
 @Entity
-@Table(name = "rank")
+@Table(name = "status")
 @Data
 @NoArgsConstructor
-public class UserRank {
+public class UserRank implements Serializable {
     @Id
-    @Column(name = "rank_id")
+    @Column(name = "user_rank_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -33,7 +31,9 @@ public class UserRank {
     @PositiveOrZero
     private Long maxPoints;
 
-    private String description;
+    @NotNull
+    @PositiveOrZero
+    private Double discount;
 
 
 }

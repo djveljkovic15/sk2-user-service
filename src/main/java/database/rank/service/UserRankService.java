@@ -1,12 +1,13 @@
 package database.rank.service;
 
 import database.rank.domain.UserRank;
-import database.role.domain.Role;
 
 import java.util.List;
 
 public interface UserRankService {
-    UserRank saveOrUpdate(UserRank role);
+    UserRank save(UserRank role);
+
+    UserRank update(Long id, UserRank role);
 
     void deleteById(Long id);
 

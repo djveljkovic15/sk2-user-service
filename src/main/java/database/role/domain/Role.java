@@ -7,14 +7,15 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "role")
 @Data
 @NoArgsConstructor
-public class Role {
+public class Role implements Serializable {
     @Id
-    @Column(name = "role_id")
+    @Column(name = "user_role_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 

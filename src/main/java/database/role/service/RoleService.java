@@ -5,7 +5,9 @@ import database.role.domain.Role;
 import java.util.List;
 
 public interface RoleService {
-    Role saveOrUpdate(Role role);
+    Role save(Role role);
+
+    Role update(Long id, Role role);
 
     void deleteById(Long id);
 

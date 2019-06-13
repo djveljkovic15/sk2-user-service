@@ -22,8 +22,13 @@ public class UserRankController {
 
     @PostMapping("/save")
     @ApiOperation("Save rank.")
-    public ResponseEntity<UserRank> saveOrUpdate(@Valid @RequestBody UserRank userRank){
-        return new ResponseEntity<>(service.saveOrUpdate(userRank), HttpStatus.CREATED);
+    public ResponseEntity<UserRank> save(@Valid @RequestBody UserRank userRank){
+        return new ResponseEntity<>(service.save(userRank), HttpStatus.CREATED);
+    }
+    @PostMapping("/update/{rankId}")
+    @ApiOperation("Update rank.")
+    public ResponseEntity<UserRank> update(@PathVariable Long rankId, @Valid @RequestBody UserRank userRank){
+        return new ResponseEntity<>(service.update(rankId, userRank), HttpStatus.CREATED);
     }
     @DeleteMapping("/delete/{rankId}")
     @ApiOperation(value = "Deletes rank.")
