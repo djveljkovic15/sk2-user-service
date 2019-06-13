@@ -20,9 +20,9 @@ public class TokenServiceImpl implements TokenService {
     public TokenResponse generate(User user) {
         Claims claims = Jwts.claims();
         claims.put("id", user.getId());
-//        claims.put("username", user.getUsername());
-//        claims.put("email", user.getEmail());
-//        claims.put("role", user.getRole().getName());
+        claims.put("username", user.getUsername());
+        claims.put("email", user.getEmail());
+        claims.put("role", user.getUserRole().getName());
 
         return new TokenResponse(Jwts.builder()
                 .setClaims(claims)

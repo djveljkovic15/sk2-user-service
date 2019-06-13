@@ -5,11 +5,15 @@ import database.role.domain.Role;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import org.apache.commons.validator.routines.EmailValidator;
+
 import javax.persistence.*;
+import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name="user")
@@ -36,8 +40,6 @@ public class User implements Serializable {
     @Column(name = "password")
     private String password;
 
-    private boolean banned;
-
     private boolean isPasswordValid(String plainText){
         return plainText!= null &&
         plainText.length()>= 3 &&
@@ -45,39 +47,44 @@ public class User implements Serializable {
     }
     public void setPassword(String password){
         if (!isPasswordValid(password))
-            throw new IllegalArgumentException("pass is invalid");
+            throw new IllegalArgumentException("Password is invalid");
         this.password=password;
     }
 
-//
-//    @Email
-//    @NotBlank
-//    @NotNull
-//    @Column(name = "email")
-//    private String email;
-//
-//
+    @NotNull
+    private boolean banned;
+
+    @Embedded
+    @ElementCollection
+    private List<Ban> banHistory;
+
+
+
+    @Email // validacija za email
+    @NotBlank
+    @NotNull
+    @Column(name = "email")
+    private String email;
+
+    public void setEmail(String email){
+        if(EmailValidator.getInstance().isValid(email))
+            this.email=email;
+    }
+
     @NotNull
     @ManyToOne
     @JoinColumn(name = "user_role")
     private Role userRole;
-//
     @NotNull
     @ManyToOne
     @JoinColumn(name = "user_rank")
     private UserRank userRank;
 
 
-    @Embedded
-    @Column(name = "banHistory")
-    private Ban banHistory;
-//
-//
-//
-//    @NotBlank
-//    @NotNull
-//    @Column(name = "numberOfReservation")
-//    private String numberOfReservations;
+    @NotBlank
+    @NotNull
+    @Column(name = "numberOfReservation")
+    private String numberOfReservations;
 
 
 }

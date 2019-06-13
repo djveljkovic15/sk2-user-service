@@ -7,6 +7,7 @@ import database.token.domain.TokenResponse;
 import database.user.domain.User;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface UserService {
     User save(User user, Role role);
@@ -19,7 +20,11 @@ public interface UserService {
 
     List<User> findAll();
 
-//    User banUser(Long userId, User admin);
+    User findByUserAndPass(String username, String password);
+
+    Optional<User> bannedList(String username);
+
+    User banUser(Long userId, User bannedBy);
 
     TokenResponse login(TokenRequest request);
 }

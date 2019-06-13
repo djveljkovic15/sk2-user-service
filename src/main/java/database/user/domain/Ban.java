@@ -8,6 +8,7 @@ import javax.persistence.Embeddable;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.util.Date;
 import java.util.List;
 
 @Data
@@ -16,14 +17,25 @@ import java.util.List;
 //@Table(name = "ban")
 public class Ban {
 
-    private Long adminId;
+//    private Long adminId;
+
+//    @NotNull
+//    @NotBlank
+//    private Boolean banned;
+//
+//    @ElementCollection
+//    private List<?> banHistory;
 
     @NotNull
-    @NotBlank
-    private Boolean banned;
+    private String bannedBy;
 
-    @ElementCollection
-    private List<?> banHistory;
+    private Date date;
+
+    public Date setDate(){
+        return new Date();
+    }
+
+
 
 
 }
