@@ -49,7 +49,8 @@ public class UserRankController {
     @CheckSecurity(roles = {"ADMIN","REGULAR"})
     @GetMapping("/{rankId}")
     @ApiOperation(value = "Finds rank by id.")
-    public ResponseEntity<UserRank> findById(@RequestHeader("Authorization") String authorization,@PathVariable Long rankId){
+    public ResponseEntity<UserRank> findById(@RequestHeader("Authorization") String authorization,
+                                             @PathVariable Long rankId){
         return new ResponseEntity<>(service.findById(rankId), HttpStatus.OK);
     }
 

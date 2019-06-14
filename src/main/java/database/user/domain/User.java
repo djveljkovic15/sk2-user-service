@@ -29,8 +29,8 @@ public class User implements Serializable {
     @Column(name = "name")
     private String name;
 
-//    @Column(name = "surname")
-//    private String surname;
+    @Column(name = "surname")
+    private String surname;
 
     @NotNull
     @Column(name = "username", unique = true)
@@ -75,6 +75,7 @@ public class User implements Serializable {
     @ManyToOne
     @JoinColumn(name = "user_role")
     private Role userRole;
+
     @NotNull
     @ManyToOne
     @JoinColumn(name = "user_rank")
